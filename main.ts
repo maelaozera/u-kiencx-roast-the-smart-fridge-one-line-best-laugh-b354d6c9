@@ -17,12 +17,22 @@ const subject = ', titled "Concerning"';
 const sting = ", cc'ing my doctor.";
 
 // Assemble the single line, fast setup, punchline last.
-const line = opener + " " + habit + subject + sting;
+function buildRoast(): string {
+  return opener + " " + habit + subject + sting;
+}
+
+const line = buildRoast();
 
 // The gate allows 1 to 160 characters; keep the line well inside it.
-if (line.length < 1 || line.length > 160) {
-  throw new Error(`entry is ${line.length} characters, must be 1-160`);
+function validateLine(candidate: string): void {
+  if (candidate.length < 1 || candidate.length > 160) {
+    throw new Error(
+      `entry is ${candidate.length} characters, must be 1-160`,
+    );
+  }
 }
+
+validateLine(line);
 
 // Write exactly one line, no trailing newline, so the byte count
 // the judge sees is the line itself and nothing else.
